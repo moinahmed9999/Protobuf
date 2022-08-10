@@ -1,4 +1,15 @@
+buildscript {
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath('com.google.protobuf:protobuf-gradle-plugin:0.8.19')
+    }
+}
+
 plugins {
+    id 'com.google.protobuf' version '0.8.19'
     id 'java'
 }
 
@@ -12,6 +23,22 @@ repositories {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    implementation 'com.google.protobuf:protobuf-java:3.21.4'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs 'build/generated/source/proto/main/java'
+        }
+    }
+}
+
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:3.21.4'
+    }
 }
 
 test {
